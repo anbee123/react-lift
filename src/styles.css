@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.thumb.active {
+  border: 5px solid green;
+  box-sizing: border-box;
+}
+
