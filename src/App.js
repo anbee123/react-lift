@@ -1,43 +1,41 @@
-import React, { useState } from 'react';
-import './styles.css';
-import imagesArr from './imageData';
-// import child componentss
-import BigImage from './BigImage';
-import SmallImage from './SmallImage';
+// IMPORT useState
+import React from "react";
+import "./styles.css";
+// 1. IMPORT imageData.js AND STORE IT IN A VARIABLE CALLED imagesArr
+import imagesArr from "./imageData.js";
 
 export default function App() {
-  // updating state causes the comp to re-render
+  // 2. USE useState TO CREATE  [bigImage, setBigImage]
+  // AND SET IT TO THE IMAGE URL OF THE FIRST ELEMENT IN THE ARRAY
   const [bigImage, setBigImage] = useState(imagesArr[0].img);
 
+  // 3. CREATE A HANDLE CLICK FUNCTION THAT ACCEPTS AN IMAGE URL
+  // THE FUNCTION SHOULD CALL setBigImage AND PASS IT THE URL
   const handleClick = (imgUrl) => {
     setBigImage(imgUrl);
   };
-  // array iterators: map, forEach, filter, reduce
+
+  // 4. CREATE A VARIABLE CALLED images THAT LOOPs OVER THE imagesArr AND RETURNS AN <IMG> ELEMENT
+  // ASSIGN ALL OF THE PROPERTIES THAT IT NEEDS: src, alt, className, key INCLUDING AN onClick EVENT THAT CALLS THE HANDLE EVENT FUNCTION AND PASSES IT THE IMG URL
   const images = imagesArr.map((image, index) => {
     return (
-      <SmallImage
-        // key is only required inside of a map
+      <img
+        className={image.class}
+        src={image.img}
+        alt={image.alt}
+        onClick={() => handleClick(image.img)}
         key={index}
-        // {...image}
-        img={image.img}
-        city={image.city}
-        bigImage={bigImage}
-        // this is how we lift state..by passing down a function
-        handleClick={handleClick}
       />
     );
   });
-
-  console.log('App - images', images);
 
   return (
     <div className="App">
       <h1>Cities Of The World</h1>
       <div id="wrapper">
         <div id="thumbnails">{images}</div>
-        {/* image is a prop (aka property) */}
-        <BigImage image={bigImage} />
-        {/* <img src={bigImage} id="bigimage" alt="bigImaage" /> */}
+        {/* THE SRC IMAGE URL SHOULD BE SET TO THE VALUE THAT IS STORED IN bigImage */}
+        <img src={bigImage} id="bigimage" alt="bigImage" />
       </div>
     </div>
   );
