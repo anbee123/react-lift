@@ -4,6 +4,8 @@ import React from "react";
 import "./styles.css";
 // 2. IMPORT imageData.js AND STORE IT IN A VARIABLE CALLED imagesArr
 import imagesArr from "./imageData.js";
+import BigImage from "./BigImage.js";
+import SmallImage from "./SmallImage";
 
 export default function App() {
   // 3. USE useState TO CREATE  [bigImage, setBigImage]
@@ -20,12 +22,12 @@ export default function App() {
   // ASSIGN ALL OF THE PROPERTIES THAT IT NEEDS: src, alt, className, key INCLUDING AN onClick EVENT THAT CALLS THE HANDLE EVENT FUNCTION AND PASSES IT THE IMG URL
   const images = imagesArr.map((image, index) => {
     return (
-      <img
-        className={image.class}
-        src={image.img}
-        alt={image.alt}
-        onClick={() => handleClick(image.img)}
-        key={index}
+      <SmallImage 
+      className={image.class}
+      src ={image.img}
+      alt ={image.alt }
+      handleClick={handleClick}
+      key={index}
       />
     );
   });
@@ -37,7 +39,8 @@ export default function App() {
         {/* 6. RENDER THE IMAGES ARRAY  */}
         <div id="thumbnails">{images}</div>
         {/* 7. THE SRC IMAGE URL SHOULD BE SET TO THE VALUE THAT IS STORED IN bigImage */}
-        <img src={bigImage} id="bigimage" alt="bigImage" />
+        {/* <img src={bigImage} id="bigimage" alt="bigImage" /> */}
+        <BigImage image ={bigImage} />
       </div>
     </div>
   );
